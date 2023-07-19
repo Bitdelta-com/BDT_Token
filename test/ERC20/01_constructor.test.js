@@ -4,8 +4,8 @@ const log = console.log;
 const decimals = 1e18;
 
 contract("BitDelta", (accounts) => {
-  let KOL_Branding_Balance = 360_000_000 * decimals;
-  let Platform_Governance_Balance = 240_000_000 * decimals;
+  let KOL_Branding_Balance = 240_000_000 * decimals;
+  let Platform_Governance_Balance = 360_000_000 * decimals;
   let Team_Incentive_Balance = 240_000_000 * decimals;
   let Referral_And_Airdrop_Balance = 240_000_000 * decimals;
   let Ecosystem_Balance = 240_000_000 * decimals;

@@ -13,8 +13,8 @@ contract BitDelta is ERC20, Ownable {
         address[13] memory addresses
         ) ERC20("BitDelta","BDT") {
         // Minting tokens to the supplied addresses with respective purposes
-        _mint(addresses[0], 360_000_000 * (10 ** decimals()));//KOL Branding
-        _mint(addresses[1], 240_000_000 * (10 ** decimals()));//Platform Governance
+        _mint(addresses[0], 240_000_000 * (10 ** decimals()));//KOL Branding
+        _mint(addresses[1], 360_000_000 * (10 ** decimals()));//Platform Governance
         _mint(addresses[2], 240_000_000 * (10 ** decimals()));//Team Incentive
         _mint(addresses[3], 240_000_000 * (10 ** decimals()));//Referral and Airdrop
         _mint(addresses[4], 240_000_000 * (10 ** decimals()));//Ecosystem

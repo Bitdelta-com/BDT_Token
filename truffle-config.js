@@ -85,7 +85,7 @@
      // Configure your compilers
      compilers: {
          solc: {
-             version: '0.8.14',
+             version: '0.8.20',
              settings: {
                  optimizer: {
                      enabled: true,

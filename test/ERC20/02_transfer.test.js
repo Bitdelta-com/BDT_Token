@@ -5,37 +5,26 @@ contract("BitDelta", (accounts) => {
   // fetch accounts on different index
   let [
     OWNER,
-    KOL_Branding,
+    Circulating_Supply,
+    Users_Onboarding_And_Staking_Rewards,
+    Marketing,
+    Reasearch_And_Development,
+    Team,
     Platform_Governance,
-    Team_Incentive,
-    Referral_And_Airdrop,
-    Ecosystem,
-    Project_Advisory_Panel,
-    Staking,
-    Founders_And_Affiliates,
-    Strategy,
-    Treasury_And_Platform,
-    Private_Sale_1,
-    Private_Sale_2,
-    Public_Sale,
   ] = accounts;
   let BitDeltaContract;
 
   beforeEach(async () => {
     BitDeltaContract = await BitDelta.new(
-        [KOL_Branding,
-        Platform_Governance,
-        Team_Incentive,
-        Referral_And_Airdrop,
-        Ecosystem,
-        Project_Advisory_Panel,
-        Staking,
-        Founders_And_Affiliates,
-        Strategy,
-        Treasury_And_Platform,
-        Private_Sale_1,
-        Private_Sale_2,
-        Public_Sale]
+        [
+          OWNER,
+          Circulating_Supply,
+          Users_Onboarding_And_Staking_Rewards,
+          Marketing,
+          Reasearch_And_Development,
+          Team,
+          Platform_Governance
+      ]
       );
   });
 
@@ -44,7 +33,7 @@ contract("BitDelta", (accounts) => {
       BitDeltaContract.transfer(
         "0x0000000000000000000000000000000000000000",
         1000,
-        {from: KOL_Branding}
+        {from: Circulating_Supply}
       ),
       "ERC20: transfer to the zero address"
     );
@@ -52,13 +41,13 @@ contract("BitDelta", (accounts) => {
 
   it("transfer should throw if balance is insufficient", async () => {
     await expectRevert(
-      BitDeltaContract.transfer(KOL_Branding, 1000, {from: OWNER}),
+      BitDeltaContract.transfer(Circulating_Supply, 1000, {from: OWNER}),
       "ERC20: transfer amount exceeds balance"
     );
   });
 
   it("transfer success", async () => {
-    const result = await BitDeltaContract.transfer(Team_Incentive, 1000, {from: KOL_Branding});
+    const result = await BitDeltaContract.transfer(Team, 1000, {from: Circulating_Supply});
 
     expectEvent(result, "Transfer");
   });

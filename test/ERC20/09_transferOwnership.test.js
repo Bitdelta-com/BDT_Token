@@ -5,43 +5,30 @@ contract("BitDelta", (accounts) => {
   // fetch accounts on different index
   let [
     OWNER,
-    KOL_Branding,
-    Platform_Governance,
-    Team_Incentive,
-    Referral_And_Airdrop,
-    Ecosystem,
-    Project_Advisory_Panel,
-    Staking,
-    Founders_And_Affiliates,
-    Strategy,
-    Treasury_And_Platform,
-    Private_Sale_1,
-    Private_Sale_2,
-    Public_Sale,
+    Circulating_Supply,
+    Users_Onboarding_And_Staking_Rewards,
+    Marketing,
+    Reasearch_And_Development,
+    Team,
+    Platform_Governance
   ] = accounts;
   let BitDeltaContract;
 
   beforeEach(async () => {
     BitDeltaContract = await BitDelta.new(
-        [KOL_Branding,
-            Platform_Governance,
-            Team_Incentive,
-            Referral_And_Airdrop,
-            Ecosystem,
-            Project_Advisory_Panel,
-            Staking,
-            Founders_And_Affiliates,
-            Strategy,
-            Treasury_And_Platform,
-            Private_Sale_1,
-            Private_Sale_2,
-            Public_Sale]
+        [   OWNER,
+    Circulating_Supply,
+    Users_Onboarding_And_Staking_Rewards,
+    Marketing,
+    Reasearch_And_Development,
+    Team,
+    Platform_Governance]
     );
   });
 
   it("only owner can transfer ownership", async () => {
     await expectRevert(
-      BitDeltaContract.transferOwnership(KOL_Branding, {from: KOL_Branding}),
+      BitDeltaContract.transferOwnership(Circulating_Supply, {from: Circulating_Supply}),
       "Ownable: caller is not the owner"
     );
   });
@@ -57,7 +44,7 @@ contract("BitDelta", (accounts) => {
   });
 
   it("transfer ownership success", async () => {
-    let result = await BitDeltaContract.transferOwnership(KOL_Branding, {from: OWNER});
+    let result = await BitDeltaContract.transferOwnership(Circulating_Supply, {from: OWNER});
     expectEvent(result, "OwnershipTransferred");
   });
 });

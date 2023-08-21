@@ -4,43 +4,30 @@ contract("BitDelta", (accounts) => {
   // fetch accounts on different index
   let [
     OWNER,
-    KOL_Branding,
+    Circulating_Supply,
+    Users_Onboarding_And_Staking_Rewards,
+    Marketing,
+    Reasearch_And_Development,
+    Team,
     Platform_Governance,
-    Team_Incentive,
-    Referral_And_Airdrop,
-    Ecosystem,
-    Project_Advisory_Panel,
-    Staking,
-    Founders_And_Affiliates,
-    Strategy,
-    Treasury_And_Platform,
-    Private_Sale_1,
-    Private_Sale_2,
-    Public_Sale,
   ] = accounts;
   let BitDeltaContract;
 
   beforeEach(async () => {
     BitDeltaContract = await BitDelta.new(
-        [KOL_Branding,
-            Platform_Governance,
-            Team_Incentive,
-            Referral_And_Airdrop,
-            Ecosystem,
-            Project_Advisory_Panel,
-            Staking,
-            Founders_And_Affiliates,
-            Strategy,
-            Treasury_And_Platform,
-            Private_Sale_1,
-            Private_Sale_2,
-            Public_Sale]
+        [     OWNER,
+          Circulating_Supply,
+          Users_Onboarding_And_Staking_Rewards,
+          Marketing,
+          Reasearch_And_Development,
+          Team,
+          Platform_Governance ]
     );
   });
 
   it("not allowance", async () => {
-    const result = await BitDeltaContract.allowance(KOL_Branding, Founders_And_Affiliates, {
-      from: KOL_Branding,
+    const result = await BitDeltaContract.allowance(Circulating_Supply, Users_Onboarding_And_Staking_Rewards, {
+      from: Circulating_Supply,
     });
 
     assert.equal(0, result.toNumber(), "wrong result");
@@ -49,9 +36,9 @@ contract("BitDelta", (accounts) => {
   it("allowance", async () => {
     const expectedAmount = 1000;
 
-    await BitDeltaContract.approve(Founders_And_Affiliates, expectedAmount, {from: KOL_Branding});
-    const result = await BitDeltaContract.allowance(KOL_Branding, Founders_And_Affiliates, {
-      from: KOL_Branding,
+    await BitDeltaContract.approve(Users_Onboarding_And_Staking_Rewards, expectedAmount, {from: Circulating_Supply});
+    const result = await BitDeltaContract.allowance(Circulating_Supply, Reasearch_And_Development, {
+      from: Circulating_Supply,
     });
 
     assert.equal(expectedAmount, result.toNumber(), "wrong result");

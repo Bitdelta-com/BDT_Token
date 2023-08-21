@@ -5,37 +5,24 @@ contract("BitDelta", (accounts) => {
   // fetch accounts on different index
   let [
     OWNER,
-    KOL_Branding,
+    Circulating_Supply,
+    Users_Onboarding_And_Staking_Rewards,
+    Marketing,
+    Reasearch_And_Development,
+    Team,
     Platform_Governance,
-    Team_Incentive,
-    Referral_And_Airdrop,
-    Ecosystem,
-    Project_Advisory_Panel,
-    Staking,
-    Founders_And_Affiliates,
-    Strategy,
-    Treasury_And_Platform,
-    Private_Sale_1,
-    Private_Sale_2,
-    Public_Sale,
   ] = accounts;
   let BitDeltaContract;
 
   beforeEach(async () => {
     BitDeltaContract = await BitDelta.new(
-        [KOL_Branding,
-            Platform_Governance,
-            Team_Incentive,
-            Referral_And_Airdrop,
-            Ecosystem,
-            Project_Advisory_Panel,
-            Staking,
-            Founders_And_Affiliates,
-            Strategy,
-            Treasury_And_Platform,
-            Private_Sale_1,
-            Private_Sale_2,
-            Public_Sale]
+        [       OWNER,
+          Circulating_Supply,
+          Users_Onboarding_And_Staking_Rewards,
+          Marketing,
+          Reasearch_And_Development,
+          Team,
+          Platform_Governance]
     );
   });
 
@@ -43,21 +30,21 @@ contract("BitDelta", (accounts) => {
     const initialAmount = 1000;
     const expectedAmount = 2000;
 
-    await BitDeltaContract.approve(Platform_Governance, initialAmount, {from: KOL_Branding});
+    await BitDeltaContract.approve(Platform_Governance, initialAmount, {from: Circulating_Supply});
     const resultBeforeIncrease = await BitDeltaContract.allowance(
-        KOL_Branding,
+      Circulating_Supply,
       Platform_Governance,
-      {from: KOL_Branding}
+      {from: Circulating_Supply}
     );
     const resultIncrease = await BitDeltaContract.increaseAllowance(
         Platform_Governance,
       initialAmount,
-      {from: KOL_Branding}
+      {from: Circulating_Supply}
     );
     const resultAfterIncrease = await BitDeltaContract.allowance(
-        KOL_Branding,
+      Circulating_Supply,
       Platform_Governance,
-      {from: KOL_Branding}
+      {from: Circulating_Supply}
     );
 
     assert.equal(
